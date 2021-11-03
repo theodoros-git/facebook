@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     get '/publication/comment/:id', to: 'user#comment', as: 'comment'
     post '/publication/comment/:id', to: 'user#comment_form', as: 'commentform'
     get '/profil', to: 'user#profil', as: 'profil'
+    
   end
 
+  get  '*path', controller: 'application', action: 'render_404'
+  post '*path', controller: 'application', action: 'render_404'
+  get  '*path', controller: 'application', action: 'render_500'
+  post '*path', controller: 'application', action: 'render_500'
 end

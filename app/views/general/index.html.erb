@@ -31,15 +31,17 @@
 	            <div class="card-body ">
 
 	              <div class="errors">
-	                    <% if flash[:login_errors]%>
-	                      <% flash[:login_errors].each do |error| %>
-	                        <p class="alert alert-danger"> <%=error%></p>
-	                      <%end%>
+	                    <% if flash[:register_success] %>	                      
+	                        <p class="alert alert-success"> <%= flash[:register_success] %></p>	              
+	                    <%end%>
+	                    <% if flash[:login_errors] %>	                      
+	                        <p class="alert alert-danger"> <%= flash[:login_errors] %></p>	              
 	                    <%end%>
 	              </div>
-	              <form method="post" action="">
 
-	                <!-- Email input -->
+	              <form method="post" action="<%= users_login_path %>">
+
+	                
 	                <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 
 	                <div class="form-outline mb-4">

@@ -26,7 +26,48 @@ class UserController < ApplicationController
 	        redirect_to '/'
 	    end
 	end
-	
+	## dashboard
+	def dashboard
+		@publications = Publication.all
+		@users = User.all
+		render "user/dashboard", layout: "layout"
+	end
+	## nouvelle publication
+	def new_publication
+		@publication = Publication.new
+		render "user/new_pub", layout: "layout"
+	end
+	def new_publication_form
+		#@content = pub_params[:content]
+		#@image = pub_params[:image]
+		#session[:pub_image] = pub_params[:image]
+		#session[:pub_content] = pub_params[:content]
+		@publication = Publication.new(pub_params)
+		@publication.user_id = session[:current_user_id]
+		@publication.published_at = Time.now
+		if @publication.save
+			flash[:pub_success] = "Post publié avec succès"
+			redirect_to '/users/dashboard'
+		else
+			flash[:pub_errors] = @publication.errors.full_messages
+			redirect_to '/users/new_publication'
+		end 
+	end
+	def new_publication_confirmation
+		#@image = session[:pub_image]
+		#@content = session[:pub_content]
+		render "user/new_pub_confirm", layout: "layout"
+	end
+	def new_publication_confirmation_form
+		@new_pub = Publication.new(pub_params)
+		@new_pub.user_id = session[:current_user_id]
+		@new_pub.published_at = Time.now
+		if @new_pub.save
+			redirect_to '/users/dashboard'
+		else
+			redirect_to '/'
+		end
+	end
 	## fonction privée
 	private
 
@@ -36,5 +77,9 @@ class UserController < ApplicationController
 
 		def login_params
 	        params.require(:login).permit(:email, :password )
+	    end
+
+	    def pub_params
+	        params.require(:publication).permit(:content, :image )
 	    end
 end

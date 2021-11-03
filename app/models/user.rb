@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+	has_many :publications
+  	has_many :commentaires
 	validates :nom, presence: true, length: { maximum: 30 }
 	validates :prenom, presence: true, length: { maximum: 30 }
   	validates :email, presence: true, length: { maximum: 255 },

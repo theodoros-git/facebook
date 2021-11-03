@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'user#dashboard', as: 'dashboard'
     get '/new_publication', to: 'user#new_publication', as: 'newpub'
     post '/new_publication', to: 'user#new_publication_form', as: 'newpubform'
-    get '/new_publication/confirmation', to: 'user#new_publication_confirmation', as: 'newpubconfirmation'
-    post '/new_publication/confirmation', to: 'user#new_publication_confirmation_form', as: 'newpubconfirmform'
+    #get '/new_publication/confirmation', to: 'user#new_publication_confirmation', as: 'newpubconfirmation'
+    #post '/new_publication/confirmation', to: 'user#new_publication_confirmation_form', as: 'newpubconfirmform'
+    get '/publication/:id', to: 'user#destroy_pub', as: 'destroypub'
   end
 
 end

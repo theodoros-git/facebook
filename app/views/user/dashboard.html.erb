@@ -8,6 +8,9 @@
       <% if flash[:pub_success] %>                       
           <p class="alert alert-success"> <%= flash[:pub_success] %></p>                
       <%end%>
+      <% if flash[:pub_destroy] %>                       
+          <p class="alert alert-warning"> <%= flash[:pub_destroy] %></p>                
+      <%end%>
     </div>
     <% @publications.each do |publication| %> 
       <div class="row mb-12">
@@ -42,7 +45,7 @@
               <a href="" class="btn btn-warning">Commenter</a>
               &nbsp;&nbsp;
               <a href="" class="btn btn-info">Modifier</a>&nbsp;&nbsp;
-              <a href="" class="btn btn-danger">Supprimer</a>              
+              <a href="<%= users_destroypub_path(publication) %>" class="btn btn-danger">Supprimer</a>              
             </div>
           </div>
         </div>  

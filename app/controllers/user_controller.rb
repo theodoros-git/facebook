@@ -53,6 +53,12 @@ class UserController < ApplicationController
 			redirect_to '/users/new_publication'
 		end 
 	end
+	def destroy_pub
+		@publication = Publication.find(params[:id])
+	    @publication.destroy
+	    flash[:pub_destroy] = "Post supprimé avec succès"
+	    redirect_to '/users/dashboard'
+	end
 	def new_publication_confirmation
 		#@image = session[:pub_image]
 		#@content = session[:pub_content]

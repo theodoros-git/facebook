@@ -14,6 +14,9 @@
       <% if flash[:pub_update] %>                       
           <p class="alert alert-success"> <%= flash[:pub_update] %></p>                
       <%end%>
+      <% if flash[:comment_success] %>                       
+          <p class="alert alert-success"> <%= flash[:comment_success] %></p>                
+      <%end%>
     </div>
     <% @publications.each do |publication| %> 
       <div class="row mb-12">
@@ -38,7 +41,25 @@
               
             </div>
             <div class="card-footer">
-              hjhfh
+              <h1>Commentaires</h1>
+              <% @commentaires.each do |commentaire| %>
+                <% if publication.id == commentaire.publication_id %>
+
+                  
+                    <i class="fas fa-user"></i> &nbsp;
+                    <% @users.each do |useri| %>
+                        <% if useri.id == commentaire.user_id %>
+                          <%= useri.nom %>
+                        <% end %>
+                    <% end %>
+
+                    <br>
+
+                        <%= commentaire.content %>
+
+                  
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -47,12 +68,12 @@
             <div class="card-body pt-56 flex pl-0">
               
                 <% if session[:current_user_id] == publication.user_id %>
-                  <a href="" class="btn btn-warning">Commenter</a>
+                  <a href="<%= users_comment_path(publication) %>" class="btn btn-warning">Commenter</a>
                   &nbsp;&nbsp;
                   <a href="<%= users_edit_path(publication) %>" class="btn btn-info">Modifier</a>&nbsp;&nbsp;
                   <a href="<%= users_destroypub_path(publication) %>" class="btn btn-danger">Supprimer</a>
                 <%else%> 
-                  <a href="" class="btn btn-warning">Commenter</a>
+                  <a href="<%= users_comment_path(publication) %>" class="btn btn-warning">Commenter</a>
                 <%end%>
               
                             

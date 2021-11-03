@@ -30,6 +30,7 @@ class UserController < ApplicationController
 	def dashboard
 		@publications = Publication.all
 		@users = User.all
+		@commentaires = Commentaire.all
 		render "user/dashboard", layout: "layout"
 	end
 	## nouvelle publication
@@ -78,6 +79,23 @@ class UserController < ApplicationController
   			redirect_to users_edit_path(@publication)
   		end
 	end
+	def comment
+		@commentaire = Commentaire.new
+		session[:current_publication_id] = params[:id]
+		render "user/comment", layout: "layout"
+	end
+	def comment_form
+		@commentaire = Commentaire.new(comment_params)
+		@commentaire.user_id = session[:current_user_id]
+		@commentaire.publication_id = session[:current_publication_id]
+		if @commentaire.save
+			flash[:comment_success] = "Commentaire publiée avec succès"
+			redirect_to '/users/dashboard'
+		else
+			flash[:comment_errors] = @commentaire.errors.full_messages
+  			redirect_to users_comment_path(session[:current_publication_id])
+		end
+	end
 	def new_publication_confirmation
 		#@image = session[:pub_image]
 		#@content = session[:pub_content]
@@ -106,5 +124,8 @@ class UserController < ApplicationController
 
 	    def pub_params
 	        params.require(:publication).permit(:content, :image )
+	    end
+	    def comment_params
+	        params.require(:commentaire).permit(:content)
 	    end
 end

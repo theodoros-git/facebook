@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get '/logout', to: 'user#destroy', as: 'destroy'
     get '/publication/modify/:id', to: 'user#edit', as: 'edit'
     post '/publication/modify/:id', to: 'user#editform', as: 'editform'
+    get '/publication/comment/:id', to: 'user#comment', as: 'comment'
+    post '/publication/comment/:id', to: 'user#comment_form', as: 'commentform'
   end
 
 end

@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  Commenter - Publication
+<% end %>
+
+<% content_for :content do %>
+  <div class="container-fluid mb-12">
+    <div class="row mt-40">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Commenter la publication.
+          </div>
+          <div class="card-body">
+              <%= form_with(model: @commentaire, url: users_commentform_path, method: "post") do |form| %>
+
+                <div class="form-outline mb-4">
+                    <%= form.label :content, "Publication", class: "form-label" %>
+                  <%= form.text_area :content, size: "70x5", class: "form-control" %>
+
+                </div>
+              <div class="text-center">
+                <%= form.submit "Commenter", class: "btn btn-success  mb-4", style: "padding-right: 50px; padding-left: 50px; font-size: 17px;" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer">
+            Commenter - Publication - Facebook
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+       
+      </div>  
+    </div>
+    
+  </div>
+<% end %>

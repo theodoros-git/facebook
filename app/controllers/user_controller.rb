@@ -96,6 +96,10 @@ class UserController < ApplicationController
   			redirect_to users_comment_path(session[:current_publication_id])
 		end
 	end
+	def profil
+		@user = User.find(session[:current_user_id])
+		render "user/profil", layout: "layout"
+	end
 	def new_publication_confirmation
 		#@image = session[:pub_image]
 		#@content = session[:pub_content]

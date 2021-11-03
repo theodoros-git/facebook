@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post '/publication/modify/:id', to: 'user#editform', as: 'editform'
     get '/publication/comment/:id', to: 'user#comment', as: 'comment'
     post '/publication/comment/:id', to: 'user#comment_form', as: 'commentform'
+    get '/profil', to: 'user#profil', as: 'profil'
   end
 
 end

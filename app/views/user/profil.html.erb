@@ -1,0 +1,37 @@
+<% content_for :head do %>
+  Profil
+<% end %>
+
+<% content_for :content do %>
+  <div class="container-fluid mb-12">
+    <div class="row mt-40">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Vos Informations
+          </div>
+          <div class="card-body">
+              <p>Noms & prénoms: <%= @user.nom %> &nbsp; <%= @user.prenom %></p>
+              <p>Email: <%= @user.email %></p>
+              <p>Sexe: 
+                <%if @user.gender == "M" %>
+                  Masculin
+                <% else %>
+                  Féminin
+                <% end %>
+              </p>
+              <p>Date d'anniversaire: <%= @user.date_of_birth %></p>
+          </div>
+          <div class="card-footer">
+            Profil - Informations - Facebook
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+       
+      </div>  
+    </div>
+    
+  </div>
+<% end %>

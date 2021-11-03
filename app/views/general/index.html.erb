@@ -37,6 +37,9 @@
 	                    <% if flash[:login_errors] %>	                      
 	                        <p class="alert alert-danger"> <%= flash[:login_errors] %></p>	              
 	                    <%end%>
+	                    <% if flash[:notice_logout] %>	                      
+	                        <p class="alert alert-success"> <%= flash[:notice_logout] %></p>	              
+	                    <%end%>
 	              </div>
 
 	              <form method="post" action="<%= users_login_path %>">

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     #get '/new_publication/confirmation', to: 'user#new_publication_confirmation', as: 'newpubconfirmation'
     #post '/new_publication/confirmation', to: 'user#new_publication_confirmation_form', as: 'newpubconfirmform'
     get '/publication/:id', to: 'user#destroy_pub', as: 'destroypub'
+    get '/logout', to: 'user#destroy', as: 'destroy'
+    get '/publication/modify/:id', to: 'user#edit', as: 'edit'
+    post '/publication/modify/:id', to: 'user#editform', as: 'editform'
   end
 
 end

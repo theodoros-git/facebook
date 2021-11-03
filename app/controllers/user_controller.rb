@@ -59,6 +59,25 @@ class UserController < ApplicationController
 	    flash[:pub_destroy] = "Post supprimé avec succès"
 	    redirect_to '/users/dashboard'
 	end
+	def destroy
+	    session[:current_user_id] = nil
+	    flash[:notice_logout] = "Déconnection réussie"
+	    redirect_to '/'
+	end
+	def edit
+		@publication = Publication.find(params[:id])
+		render "user/edit", layout: "layout"
+	end
+	def editform
+		@publication = Publication.find(params[:id])
+		if @publication.update(pub_params)
+			flash[:pub_update] = "Post mis à jour avec succès"
+			redirect_to '/users/dashboard'
+		else
+			flash[:pub_update_errors] = @publication.errors.full_messages
+  			redirect_to users_edit_path(@publication)
+  		end
+	end
 	def new_publication_confirmation
 		#@image = session[:pub_image]
 		#@content = session[:pub_content]

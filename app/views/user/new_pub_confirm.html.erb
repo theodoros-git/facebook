@@ -11,9 +11,9 @@
             Veuillez Confirmer votre nouvelle publication.
           </div>
           <div class="card-body">
-              <img src="<%= @image %>">
+              <img src="<%= @publication.image %>">
 
-              <p><%= @content %></p>
+              <p><%= @publication.content %></p>
           </div>
           <div class="card-footer">
             Confirmation - Nouvelle Publication - Facebook
@@ -21,13 +21,11 @@
         </div>
       </div>
       <div class="col-md-3">
-        <form action="" method="">
-          
-        </form>
-          <%= form_with(model: @publication, local: true,url: users_newpubconfirmform_path, method: "post") do |form| %>
-          <%= form.hidden_field :image %>
-          <%= form.hidden_field :content %>
-          <%= form.submit "Confirmer", class: "btn btn-primary" %>
+          <%= form_with(model: @publication, local: true, url: users_newpubconfirmform_path) do |form| %>
+
+            <%= form.hidden_field :image %>
+            <%= form.hidden_field :content %>
+            <%= form.submit "Confirmer", class: "btn btn-primary" %>
           <% end %>
           
       </div>  

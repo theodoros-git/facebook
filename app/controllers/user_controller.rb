@@ -43,16 +43,8 @@ class UserController < ApplicationController
 		#@image = pub_params[:image]
 		#session[:pub_image] = pub_params[:image]
 		#session[:pub_content] = pub_params[:content]
-		@publication = Publication.new(pub_params)
-		@publication.user_id = session[:current_user_id]
-		@publication.published_at = Time.now
-		if @publication.save
-			flash[:pub_success] = "Post publié avec succès"
-			redirect_to '/users/dashboard'
-		else
-			flash[:pub_errors] = @publication.errors.full_messages
-			redirect_to '/users/new_publication'
-		end 
+		@publication = Publication.new(pub_params) 
+		render "user/new_pub_confirm", layout: "layout"
 	end
 	def destroy_pub
 		@publication = Publication.find(params[:id])
@@ -103,16 +95,19 @@ class UserController < ApplicationController
 	def new_publication_confirmation
 		#@image = session[:pub_image]
 		#@content = session[:pub_content]
+		@publication = Publication.new(pub_params)
 		render "user/new_pub_confirm", layout: "layout"
 	end
 	def new_publication_confirmation_form
-		@new_pub = Publication.new(pub_params)
-		@new_pub.user_id = session[:current_user_id]
-		@new_pub.published_at = Time.now
-		if @new_pub.save
+		@publication = Publication.new(pub_params)
+		@publication.user_id = session[:current_user_id]
+		@publication.published_at = Time.now
+		if @publication.save
+			flash[:pub_success] = "Post publié avec succès"
 			redirect_to '/users/dashboard'
 		else
-			redirect_to '/'
+			flash[:pub_errors] = @publication.errors.full_messages
+			redirect_to '/users/new_publication'
 		end
 	end
 	## fonction privée
